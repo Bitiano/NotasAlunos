@@ -38,16 +38,10 @@ public class Main {
         NotasAluno notasAluno = new NotasAluno(new Aluno(nome, chamada, curso, turma), disciplinas);
 
         Boletim boletim = new Boletim();
-        Resultado resultado = boletim.avaliar(notasAluno);
+        boletim.avaliar(notasAluno);
 
-        System.out.println("Nome: " + resultado.getAluno().getNome());
-        System.out.println("Chamada: " + resultado.getAluno().getChamada());
-        System.out.println("Curso: " + resultado.getAluno().getCurso());
-        System.out.println("Turma: " + resultado.getAluno().getTurma());
-        System.out.println("Situação: " + resultado.getSituacao());
-        System.out.println("Quantidade de Aprovações: " + resultado.getQtdAprovacoes());
-        System.out.println("Quantidade de Reprovações: " + resultado.getQtdReprovacoes());
-
+        System.out.println("Nome: " + notasAluno.getAluno().getNome());
+        System.out.println("Situacao: " + boletim.VerificarSituacao(chamada, qtdDisciplinas));
         sc.close();  
        
     }
