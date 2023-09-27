@@ -25,10 +25,10 @@ public class Boletim {
     public String VerificarSituacao (double media, int faltas) {
         if (media < 6) {
             return "DP por Nota";
-        } else if (faltas > 4) {
+        } 
+        if (faltas > 4) {
             return "DP por Faltas";
-        } else {
-            return "Aprovado";
-        }
+        }  
+        return "Aprovado";
     }
 }

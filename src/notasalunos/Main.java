@@ -21,16 +21,19 @@ public class Main {
         int qtdDisciplinas = sc.nextInt();
 
         NotaDisciplina[] disciplinas = new NotaDisciplina[qtdDisciplinas];
+        String disciplina = "";
+        double media = 0;
+        int faltas = 0;
         for(int i = 0; i < qtdDisciplinas; i++){
             System.out.println("Digite o nome da disciplina: ");
-            String disciplina = sc.nextLine();
+            disciplina = sc.nextLine();
             sc.nextLine();
 
             System.out.println("Digite a média final do aluno: ");
-            double media = sc.nextDouble();
+            media = sc.nextDouble();
 
             System.out.println("Digite a quantidade de faltas do aluno: ");
-            int faltas = sc.nextInt();
+            faltas = sc.nextInt();
 
             disciplinas[i] = new NotaDisciplina(disciplina, media, faltas);
         }
@@ -38,10 +41,16 @@ public class Main {
         NotasAluno notasAluno = new NotasAluno(new Aluno(nome, chamada, curso, turma), disciplinas);
 
         Boletim boletim = new Boletim();
-        boletim.avaliar(notasAluno);
+        Resultado resultado = boletim.avaliar(notasAluno);
 
         System.out.println("Nome: " + notasAluno.getAluno().getNome());
-        System.out.println("Situacao: " + boletim.VerificarSituacao(chamada, qtdDisciplinas));
+        System.out.println("Chamada: " + notasAluno.getAluno().getChamada());
+        System.out.println("Curso: " + notasAluno.getAluno().getCurso());
+        System.out.println("Turma: " + notasAluno.getAluno().getTurma());
+        System.out.println("Quantidade de disciplinas: " + qtdDisciplinas);
+        System.out.println("Quantidade de aprovações: " + resultado.getQtdAprovacoes());
+        System.out.println("Quantidade de reprovações: " + resultado.getQtdReprovacoes());
+        System.out.println("Situacao: " + boletim.VerificarSituacao(chamada, faltas));
         sc.close();  
        
     }
