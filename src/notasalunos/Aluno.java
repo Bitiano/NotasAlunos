@@ -6,7 +6,7 @@ public class Aluno {
     private String curso;
     private String turma;
 
-    public Aluno(String nome, int chamada, String curso, String Turma) {
+    public Aluno(String nome, int chamada, String curso, String turma) {
         this.nome = nome;
         this.chamada = chamada;
         this.curso = curso;
@@ -43,9 +43,5 @@ public class Aluno {
 
     public void setTurma(String turma) {
         this.turma = turma;
-    }
-
-    public String toString() {
-        return "Aluno{" + "nome=" + nome + ", chamada=" + chamada + ", curso=" + curso + ", turma=" + turma + '}';
-    }
+    }    
 }

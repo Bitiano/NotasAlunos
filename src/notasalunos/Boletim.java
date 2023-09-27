@@ -1,37 +1,34 @@
 package notasalunos;
 
 public class Boletim {
-    public Resultado avaliar(NotasAlunos notasAlunos) {
-        Aluno aluno = notasAlunos.getAluno();
-        NotaDiciplina[] diciplinas = notasAlunos.getDiciplinas();
-        
+    public Resultado avaliar (NotasAluno notasAluno) {
+        Resultado resultado = new Resultado(notasAluno.getAluno(), notasAluno.getDisciplinas());
         int qtdAprovacoes = 0;
         int qtdReprovacoes = 0;
-        
-        for (NotaDiciplina notaDiciplina : diciplinas) {
-            if (notaDiciplina.getMedia() >= 6) {
+        for (NotaDisciplina notaDisciplina : notasAluno.getDisciplinas()) {
+            if (VerificarSituacao(notaDisciplina.getMedia(), notaDisciplina.getFaltas()).equals("Aprovado")) {
                 qtdAprovacoes++;
             } else {
                 qtdReprovacoes++;
             }
         }
-        
-        String situacao;
-        if (qtdAprovacoes == diciplinas.length) {
-            situacao = "Aprovado";
+        if (qtdReprovacoes > 0) {
+            resultado.setSituacao("Reprovado");
         } else {
-            situacao = "Reprovado";
+            resultado.setSituacao("Aprovado");
         }
-        Resultado resultado = new Resultado(aluno, diciplinas, situacao, qtdAprovacoes, qtdReprovacoes);
-        resultado.setSituacao(situacao);
+        resultado.setQtdAprovacoes(qtdAprovacoes);
+        resultado.setQtdReprovacoes(qtdReprovacoes);
         return resultado;
     }
 
-    public String verificarSituacao(double media, int faltas){
-        if (media >= 6 && faltas <= 4) {
-            return "Aprovado";
+    public String VerificarSituacao (double media, int faltas) {
+        if (media < 6) {
+            return "DP por Nota";
+        } else if (faltas > 4) {
+            return "DP por Faltas";
         } else {
-            return "Reprovado";
+            return "Aprovado";
         }
     }
 }

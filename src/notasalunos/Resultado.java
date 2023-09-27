@@ -2,39 +2,26 @@ package notasalunos;
 
 public class Resultado {
     private Aluno aluno;
-    private NotaDiciplina[] disciplina;
+    private NotaDisciplina[] disciplinas;
 
     private String situacao;
     private int qtdAprovacoes;
     private int qtdReprovacoes;
 
-    public Resultado(Aluno aluno, NotaDiciplina[] disciplina, String situacao2, int qtdAprovacoes, int qtdReprovacoes) {
+    public Resultado(Aluno aluno, NotaDisciplina[] disciplinas) {
         this.aluno = aluno;
-        this.disciplina = disciplina;
-    }
-
-    public void calcular() {
-        for (NotaDiciplina notaDiciplina : disciplina) {
-            if (notaDiciplina.getMedia() >= 6) {
-                qtdAprovacoes++;
-            } else {
-                qtdReprovacoes++;
-            }
-        }
-
-        if (qtdAprovacoes == disciplina.length) {
-            situacao = "Aprovado";
-        } else {
-            situacao = "Reprovado";
-        }
+        this.disciplinas = disciplinas;
+        this.situacao = "";
+        this.qtdAprovacoes = 0;
+        this.qtdReprovacoes = 0;
     }
 
     public Aluno getAluno() {
         return aluno;
     }
 
-    public NotaDiciplina[] getDisciplina() {
-        return disciplina;
+    public NotaDisciplina[] getDisciplinas() {
+        return disciplinas;
     }
 
     public String getSituacao() {
@@ -53,8 +40,8 @@ public class Resultado {
         this.aluno = aluno;
     }
 
-    public void setDisciplina(NotaDiciplina[] disciplina) {
-        this.disciplina = disciplina;
+    public void setDisciplinas(NotaDisciplina[] disciplinas) {
+        this.disciplinas = disciplinas;
     }
 
     public void setSituacao(String situacao) {
@@ -67,6 +54,22 @@ public class Resultado {
 
     public void setQtdReprovacoes(int qtdReprovacoes) {
         this.qtdReprovacoes = qtdReprovacoes;
+    }
+
+    public void calcularSituacao() {
+        for (int i = 0; i < this.disciplinas.length; i++) {
+            if (this.disciplinas[i].getMedia() >= 7) {
+                this.qtdAprovacoes++;
+            } else {
+                this.qtdReprovacoes++;
+            }
+        }
+
+        if (this.qtdReprovacoes > 0) {
+            this.situacao = "Reprovado";
+        } else {
+            this.situacao = "Aprovado";
+        }
     }
 
 }
